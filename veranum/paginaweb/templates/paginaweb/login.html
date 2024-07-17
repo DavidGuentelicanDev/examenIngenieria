@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Veranum
+{% endblock %}
+
+{% block content %}
+    {% load static %}
+    <main>
+        <section class="">
+            <div class="container">
+                <div class="row justify-content-center mt-4 mb-4">
+                    <div class="col-md-6">
+                        <div class="card shadow-sm rounded">
+                            <div class="card-body">
+                                <h1 class="text-center">Login</h1>
+                                <form id="form_login" method="POST" action="{% url 'login_admin' %}">
+                                    {% csrf_token %}
+                                    <div class="mb-3">
+                                        <label for="txt_usuario" class="form-label">Usuario</label>
+                                        <input type="text" class="form-control" id="txt_usuario" name="usuario" required />
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="txt_clave" class="form-label">Contraseña</label>
+                                        <input type="password" class="form-control" id="txt_clave" name="clave" required />
+                                    </div>
+                                    <button type="submit" class="btn btn-warning" id="btn_login">Iniciar sesión</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+{% endblock %}
+
+{% block footer %}
+    {% load static %}
+    <script src="{% static 'js/login.js' %}"></script>
+{% endblock %}

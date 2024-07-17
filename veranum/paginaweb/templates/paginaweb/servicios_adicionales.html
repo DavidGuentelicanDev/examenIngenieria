@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Veranum
+{% endblock %}
+
+{% block content %}
+    {% load static %}
+    <main>
+        <div class="container">
+            <div class="search-bar-horizontal">
+                <h1 class="logo">Servicios adicionales</h1>
+            </div>
+            <section class="main-content image-sections">
+                <section class="">
+                    <div class="container text-center">
+                        <div class="row row-cols-2 g-4">
+                            <!--card-->
+                            {% for i in servicios_adicionales %}
+                                <div class="card mx-2" style="width: 33.5rem;">
+                                    <img src="{% static i.imagen_serv_adicional %}" class="card-img-top" alt="...">
+                                    <div class="card-body">
+                                        <p class="card-text"><strong>{{ i.nombre_serv_adicional }}</strong></p>
+                                        <p class="card-text">{{ i.desc_serv_adicional }}</p>
+                                        <p class="card-text">Valor adicional: ${{ i.precio_serv_adicional }}</p>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </section>
+            </section>
+        </div>
+    </main>
+{% endblock %}
+
+{% block footer %}
+    {% load static %}
+    <script src=""></script>
+{% endblock %}

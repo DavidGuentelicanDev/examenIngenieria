@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Veranum
+{% endblock %}
+
+{% block content %}
+    {% load static %}
+    <main>
+        <section class="main-content image-sections">
+            <section class="options image-section">
+                <h2>Opciones</h2>
+                <ul>
+                    <li>
+                        <a href="">
+                            <img src="https://imgcy.trivago.com//hardcodedimages/homepage-landing/usp/SearchDesktop.svg" alt="Hoteles">
+                            Hoteles
+                        </a>
+                        <p>Busca rápido<br>Busca entre cualquiera de nuestros dos hoteles.</p>
+                    </li>
+                    <li>
+                        <a href="">
+                            <img src="https://imgcy.trivago.com//hardcodedimages/homepage-landing/usp/CompareDesktop.svg" alt="Habitaciones">
+                            Habitaciones
+                        </a>
+                        <p>Revisa<br>Revisa todas nuestras habitaciones a los mejores precios.</p>
+                    </li>
+                    <li>
+                        <a href="">
+                            <img src="https://imgcy.trivago.com//hardcodedimages/homepage-landing/usp/SaveDesktop.svg" alt="Servicios Adicionales">
+                            Servicios Adicionales
+                        </a>
+                        <p>Ahorra a lo grande<br>Descubre increíbles ofertas en nuestra página web.</p>
+                    </li>
+                </ul>
+            </section>
+            <section class="image-sections">
+                <div class="image-section" id="hoteles">
+                    <img src="{% static 'assets/1.jpg' %}" alt="Hoteles">
+                    <a href="{% url 'lista_hoteles' %}"><button>Hoteles</button></a>
+                </div>
+                <div class="image-section" id="habitaciones">
+                    <img src="{% static 'assets/3.jpg' %}" alt="Habitaciones">
+                    <a href="{% url 'habitaciones_tipo' %}"><button>Habitaciones</button></a>
+                </div>
+                <div class="image-section" id="servicios">
+                    <img src="{% static 'assets/2.jpg' %}" alt="Servicios Adicionales">
+                    <a href="{% url 'adicionales_servicios' %}"><button>Servicios Adicionales</button></a>
+                </div>
+                <div class="image-section" id="promociones">
+                    <img src="{% static 'assets/3.jpg' %}" alt="Promociones">
+                    <a href="{% url 'lista_promociones' %}"><button>Promociones</button></a>
+                </div>
+            </section>
+        </section>
+    </main>
+{% endblock %}
+
+{% block footer %}
+    {% load static %}
+    <script src=""></script>
+{% endblock %}

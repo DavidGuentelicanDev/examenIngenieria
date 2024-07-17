@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Hoteles
+{% endblock %}
+
+{% block content %}
+    {% load static %}
+    {% for hotel in hoteles %}
+        <div class="card mb-3 mt-3 mx-3">
+            <img src="{% static hotel.imagen_hotel %}" class="card-img-top imagen-hotel" alt="Imagen de {{ hotel.nombre_hotel }}">
+            <div class="card-body">
+                <h5 class="card-title">{{ hotel.nombre_hotel }}</h5>
+                <p class="card-text">{{ hotel.desc_hotel }}</p>
+                <p class="card-text"><small class="text-body-secondary">Dirección: {{ hotel.direccion }}, {{ hotel.comuna }}</small></p>
+                <a type="button" class="btn btn-warning" href="{% url 'hotel_ficha' hotel.id_hotel %}">Ir al Hotel</a>
+            </div>
+        </div>
+    {% endfor %}
+{% endblock %}
+
+{% block footer %}
+    {% load static %}
+    <script src=""></script>
+{% endblock %}

@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Promociones
+{% endblock %}
+
+{% block content %}
+    {% load static %}
+    <div class="container mt-5 mb-5">
+        <h1 class="text-center mb-5">Promociones</h1>
+        {% for promocion in promociones %}
+            <h2 class="text-center">{{ promocion.nombre_promocion }}</h2>
+            <div class="text-center mt-4">
+                {% if promocion.imagen_promocion %}
+                    <img src="{% static promocion.imagen_promocion %}" alt="Imagen de la promoción" class="img-fluid" style="max-width: 1000px; height: auto;">
+                {% else %}
+                    <img src="{% static 'assets/promocion_generica.jpg' %}" alt="Imagen por defecto" class="img-fluid" style="max-width: 1000px; height: auto;">
+                {% endif %}
+            </div>
+            <div class="mt-4">
+                <div class="text-center mt-4 mb-4 p-3 rounded border">
+                    <p><strong>{{ promocion.porc_descuento }}% de descuento</strong> en el <strong>{{ promocion.hotel.nombre_hotel }}</strong> en todas las habitaciones <strong>{{ promocion.tipo_habitacion.nombre_tipo_habitacion }}</strong></p>
+                    <p><strong>Duración:</strong> Desde el <strong>{{ promocion.fecha_inicio }}</strong> al <strong>{{ promocion.fecha_fin }}</strong></p>
+                    <p>{{ promocion.desc_promocion }}</p>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
+
+{% block footer %}
+    {% load static %}
+    <script src=""></script>
+{% endblock %}

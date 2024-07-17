@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Portal Administración
+{% endblock %}
+
+{% block content %}
+    {% load static %}
+    <main>
+        <section class="">
+            <div class="mt-4 mb-4 mx-4">
+                <h1>Portal de Administración</h1>
+                <br>
+                <div>
+                    <h3>Promociones</h3>
+                    {% if user.rol == 'M' %}
+                        <a type="button" class="btn btn-success" href="{% url 'promocion_crear' %}">Agregar promoción</a>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="table-responsive mt-4 mb-4 mx-4">
+                <table class="table table-striped table-bordered">
+                    <thead>
+                        <tr>
+                            <th scope="col">Código</th>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Hotel</th>
+                            <th scope="col">Habitación</th>
+                            <th scope="col">Descuento</th>
+                            <th scope="col">Fecha inicio</th>
+                            <th scope="col">Fecha fin</th>
+                            <th scope="col">Publicada por</th>
+                            <th scope="col">Estado</th>
+                            <th scope="col">Fecha revisión</th>
+                            <th scope="col">Revisada por</th>
+                            <th scope="col">Ver detalles</th>
+                            {% if user.rol == 'M' %}
+                                <th scope="col">Editar</th>
+                                <th scope="col">Eliminar</th>
+                            {% endif %}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for i in promociones %}
+                            <tr>
+                                <td>{{ i.codigo_promocion }}</td>
+                                <td>{{ i.nombre_promocion }}</td>
+                                <td>{{ i.hotel.nombre_hotel }}</td>
+                                <td>{{ i.tipo_habitacion.nombre_tipo_habitacion }}</td>
+                                <td>{{ i.porc_descuento }}%</td>
+                                <td>{{ i.fecha_inicio }}</td>
+                                <td>{{ i.fecha_fin }}</td>
+                                <td>{{ i.publicada_por.username }}</td>
+                                {% if i.estado_promocion == 'P' %}
+                                    <td>Pendiente</td>
+                                {% elif i.estado_promocion == 'A' %}
+                                    <td>Aprobada</td>
+                                {% elif i.estado_promocion == 'R' %}
+                                    <td>Rechazada</td>
+                                {% else %}
+                                    <td>Finalizada</td>
+                                {% endif %}
+                                {% if i.fecha_revision %}
+                                    <td>{{ i.fecha_revision|date:"d/m/Y H:i"|default:"" }}</td>
+                                {% else %}
+                                    <td></td>
+                                {% endif %}
+                                {% if i.revisada_por %}
+                                    <td>{{ i.revisada_por.username }}</td>
+                                {% else %}
+                                    <td></td>
+                                {% endif %}
+                                <td><a href="{% url 'preliminar_promocion' i.codigo_promocion %}" type="button" class="btn btn-info">Detalles</a></td>
+                                {% if user.rol == 'M' %}
+                                    <td><a href="{% url 'promocion_editar' i.codigo_promocion %}" type="button" class="btn btn-warning">Editar</a></td>
+                                    <td>
+                                        <form class="form_eliminarPromocion" method="post" action="{% url 'promocion_eliminar' i.codigo_promocion %}">
+                                            {% csrf_token %}
+                                            <button type="submit" class="btn btn-danger btn_eliminarPromocion">Eliminar</button>
+                                        </form>
+                                    </td>
+                                {% endif %}
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+{% endblock %}
+
+{% block footer %}
+    {% load static %}
+    <script src="{% static 'js/eliminar_promocion.js' %}"></script>
+{% endblock %}

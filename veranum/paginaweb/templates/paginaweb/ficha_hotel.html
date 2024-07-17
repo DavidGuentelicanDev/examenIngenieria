@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Hoteles
+{% endblock %}
+
+{% block content %}
+    {% load static %}
+    <div class="card mb-3 mt-3 mx-3">
+        <h1 class="mt-1">{{ hotel.nombre_hotel }}</h1>
+        <img src="{% static hotel.imagen_hotel %}" class="card-img-top mt-1" alt="Imagen de {{ hotel.nombre_hotel }}">
+        <div class="card-body">
+            <h5 class="card-title">Datos del hotel</h5>
+            <p class="card-text"><strong>Cantidad de habitaciones:</strong> {{ hotel.cant_habitaciones }}</p>
+            <p class="card-text"><strong>Dirección:</strong> {{ hotel.direccion }}, {{ hotel.comuna }}</p>
+            <p class="card-text"><strong>Teléfono:</strong> {{ hotel.telefono }}</p>
+            <p class="card-text"><strong>Correo:</strong> {{ hotel.correo_hotel }}</p>
+        </div>
+    </div>
+
+    <div class="container mt-5">
+        <h2>Servicios Disponibles por Hotel</h2>
+        <div class="row">
+            {% for servicio in servicios %}
+                <div class="col-md-4">
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ servicio.serv_adicional.nombre_serv_adicional }}</h5>
+                            <p class="card-text"><strong>Precio adicional:</strong> ${{ servicio.serv_adicional.precio_serv_adicional }}</p>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="container mt-5">
+        <h2>Habitaciones</h2>
+        <div class="row">
+            {% for habitacion in habitaciones %}
+                <div class="col-md-4">
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <h5 class="card-title">Habitación {{ habitacion.numero_habitacion }}</h5>
+                            <p class="card-text">Tipo de habitación: {{ habitacion.tipo_habitacion.nombre_tipo_habitacion }}</p>
+                            <p class="card-text"><strong>Camas:</strong> {{ habitacion.tipo_habitacion.cant_camas }}</p>
+                            <p class="card-text"><strong>Baño privado:</strong> {% if habitacion.tipo_habitacion.bano_privado %}Sí{% else %}No{% endif %}</p>
+                            <p class="card-text"><strong>Precio por noche:</strong> ${{ habitacion.tipo_habitacion.precio_noche }}</p>
+                            <p class="card-text"><strong>Estado:</strong> {% if habitacion.estado_habitacion %}Disponible{% else %}No disponible{% endif %}</p>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div>
+        <a type="button" class="btn btn-warning mx-5" href="{% url 'lista_hoteles' %}">Volver a Hoteles</a>
+    </div>
+{% endblock %}
+
+{% block footer %}
+    {% load static %}
+    <script src=""></script>
+{% endblock %}
